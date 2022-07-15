@@ -9,8 +9,8 @@
     --Violet : hsl(264, 64%, 52%);
     --Softorange : hsl(43, 84%, 65%);
 
-    --Verydarkblue: hsl(226, 43%, 10%);
-    --Darkblue: hsl(235, 46%, 20%);
+    --Verydarkblue: #0f1424;
+    --Darkblue: hsl(236, 45%, 20%);
     --Desaturatedblue: hsl(235, 45%, 61%);
     --PaleBlue: hsl(236, 100%, 87%);
 }
@@ -41,4 +41,114 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* table styles */
+
+/* 
+Generic Styling, for Desktops/Laptops 
+*/
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: var(--Darkblue); 
+}
+
+td, th { 
+  padding: 16px ;
+  border: 1px solid #3b3b3b; 
+  text-align: left; 
+  vertical-align:middle;
+}
+th { 
+  background: #353a4c; 
+  color: #ebebeb; 
+  font-weight: bold; 
+  padding: 20px 16px;
+
+
+}
+
+tbody{
+  border-collapse: collapse; 
+}
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+    
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr { border: 1px solid #ccc; }
+    
+    td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid rgb(46, 45, 45); 
+        position: relative;
+        padding-left: 50%; 
+    }
+    
+    td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+    }
+    
+    /*
+    Label the data
+    */
+    td:nth-of-type(1):before { content: "Name"; }
+    td:nth-of-type(2):before { content: "Username"; }
+    td:nth-of-type(3):before { content: "Email"; }
+    td:nth-of-type(4):before { content: "Address"; }
+    td:nth-of-type(5):before { content: "Actions"; }
+
+    td:nth-of-type(1):before,
+    td:nth-of-type(2):before,
+    td:nth-of-type(3):before,
+    td:nth-of-type(4):before,
+    td:nth-of-type(5):before{
+      padding: 9.30px 15px;
+    }
+}
+/*btns*/
+
+.edit, .delete, .save{
+  cursor: pointer;
+  padding: 8px 10px;
+  border: 1px solid transparent; 
+  color: #ebebeb;
+  margin-right: 5px;
+  border-radius: 8px;
+}
+.edit{
+  background-color: var(--Softblue);
+}
+.delete{
+  background-color: var(--Lightred);
+}
+.save{
+  background-color: var(--Limegreen);
+}
+
+
+/* table styles */
 
