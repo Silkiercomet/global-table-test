@@ -16,7 +16,7 @@ const ModalEditForm = ({ elementToEdit, editRow, setEditContactId }) => {
 
   return (
     <>
-      <div id="myModal" class={styles.modal}>
+      <div id="myModal" className={styles.modal}>
         <section className={styles.container}>
           <header className={styles.modal__header}>
             <h1 className={styles.title}>edit element</h1>
