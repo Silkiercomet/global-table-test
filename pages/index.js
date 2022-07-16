@@ -1,80 +1,46 @@
 import Head from 'next/head'
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import { useForm } from "react-hook-form";
 import styles from '../styles/Home.module.css'
 import Table from "../components/tabla/Table"
 import { nanoid } from 'nanoid'
 import AddForm from '../components/addForm/AddForm';
 import ModalEditForm from '../components/modalEditForm/ModalEditForm';
-export default function Home() {
-  let data = [
-    {
-      "id": 1,
-      "name": "Leanne Graham",
-      "username": "Bret",
-      "email": "Sincere@april.biz",
-      "address": {
-        "street": "Kulas Light",
-        "suite": "Apt. 556",
-        "city": "Gwenborough",
-        "zipcode": "92998-3874",
-        "geo": {
-          "lat": "-37.3159",
-          "lng": "81.1496"
-        }
-      },
-      "phone": "1-770-736-8031 x56442",
-      "website": "hildegard.org",
-      "company": {
-        "name": "Romaguera-Crona",
-        "catchPhrase": "Multi-layered client-server neural-net",
-        "bs": "harness real-time e-markets"
-      }
-    },
-    {
-      "id": 2,
-      "name": "Ervin Howell",
-      "username": "Antonette",
-      "email": "Shanna@melissa.tv",
-      "address": {
-        "street": "Victor Plains",
-        "suite": "Suite 879",
-        "city": "Wisokyburgh",
-        "zipcode": "90566-7771",
-        "geo": {
-          "lat": "-43.9509",
-          "lng": "-34.4618"
-        }
-      },
-      "phone": "010-692-6593 x09125",
-      "website": "anastasia.net",
-      "company": {
-        "name": "Deckow-Crist",
-        "catchPhrase": "Proactive didactic contingency",
-        "bs": "synergize scalable supply-chains"
-      }
-    },
-    {
-      "id": 3,
-      "name": "Clementine Bauch",
-      "username": "Samantha",
-      "email": "Nathan@yesenia.net",
-      "address": {
-        "street": "Douglas Extension",
-        "suite": "Suite 847",
-        "city": "McKenziehaven",
-      }}
-  ]
-  const [display, setDisplay] = useState(data)
-  const [add, setAdd] = useState(true)
+import { db } from '../firebase-config';
+import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore"
 
+export default function Home() {
+  
+  const [display, setDisplay] = useState([])
+  const [add, setAdd] = useState(true)
   const [editContactId, setEditContactId] = useState(null);
   const [elementToEdit, setElementToEdit] = useState({});
+
+  const userCollectionRef = collection(db, "users")
+  useEffect(() => {
+
+    (async function() {
+      const data = await getDocs(userCollectionRef)
+      setDisplay(data.docs.map(doc => ({...doc.data(), id: doc.id})));
+    })();
+
+  },[])
+  const createUser = async (contact) => {
+    await addDoc(userCollectionRef, contact)
+  }
+
+  const updateUser = async (id, data) => {
+    const userDoc = doc(db, "users", id)
+    await updateDoc(userDoc, data)
+  }
+  const deleteUser = async (id) => {
+    const userDoc = doc(db, "users", id)
+    await deleteDoc(userDoc)
+  }
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const addContact = (event) => {
     const newContact = {
-      id: nanoid(),
       name:event.name,
       username:event.username,
       email:event.email,
@@ -84,12 +50,15 @@ export default function Home() {
         city: event.city
         }
       }
+
+      createUser(newContact)
+
       reset({name:"",username:"",email:"",
         street:"",
         suite: "",
         city: ""
       })
-    setDisplay([...display, newContact])
+    setDisplay([...display, {id: nanoid(),...newContact}])
   }
   const editRow = (event) => {
     const newContact = {
@@ -102,6 +71,7 @@ export default function Home() {
         city: event.city
         }
       }
+      updateUser(editContactId,newContact)
       let newList = display.map(e => {
         if(e.id === editContactId){
           console.log({ id:e.id , ...newContact})
@@ -113,6 +83,7 @@ export default function Home() {
     setDisplay(newList)
   }
   const handleDelete = (id) => {
+    deleteUser(id)
     const newList = display.filter(e => e.id !== id)
     setDisplay(newList)
   }
@@ -146,3 +117,4 @@ export default function Home() {
     </div>
   )
 }
+
