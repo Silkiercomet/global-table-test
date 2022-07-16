@@ -1,4 +1,4 @@
-const Table = ({ data, setElementToEdit, setEditContactId, handleDelete }) => {
+const Table = ({ data, setElementToEdit, setEditContactId, handleDelete, setDisplay }) => {
 
   const handleEdit = (contact) => {
     setElementToEdit(contact);
@@ -33,7 +33,7 @@ const Table = ({ data, setElementToEdit, setEditContactId, handleDelete }) => {
               </button>
               <button
                 className="delete"
-                onClick={() => handleDelete(contact.id)}
+                onClick={() => handleDelete(contact.id,setDisplay,data)}
               >
                 delete
               </button>
