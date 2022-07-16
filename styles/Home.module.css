@@ -11,9 +11,12 @@
   justify-content: flex-start;
   align-items: center;
 }
-.addBtn{
+.addBtn {
   background-color: transparent;
-  padding: 10px 25px;
+  padding: 10px 0;
+  margin-right: 8px;
+  max-width: 125px;
+  width: 100%;
   border-radius: 15px;
   font-size: 1.4rem;
   border: 4px solid var(--PaleBlue);
@@ -21,7 +24,7 @@
   transition: 300ms ease-in-out;
   cursor: pointer;
 }
-.addBtn:hover{
+.addBtn:hover {
   background-color: var(--Violet);
   border: 4px solid var(--Violet);
   color: white;
@@ -42,10 +45,6 @@
   flex-grow: 1;
 }
 
-
-
-
-
 .grid {
   display: flex;
   align-items: center;
@@ -53,8 +52,6 @@
   flex-wrap: wrap;
   max-width: 800px;
 }
-
-
 
 .logo {
   height: 1em;

@@ -24,23 +24,30 @@ const ModalEditForm = ({ elementToEdit, editRow, setEditContactId }) => {
       city: elementToEdit.address["city"],
     });
   }, [elementToEdit]);
-  
+
   return (
     <>
-      <div className={styles.container}>
-        <h1>edit element</h1>
-        <span className={styles.close} onClick={() => setEditContactId(null)}>
-          &times;
-        </span>
+      <div id="myModal" class={styles.modal}>
+        <section className={styles.container}>
+          <header className={styles.modal__header}>
+            <h1 className={styles.title}>edit element</h1>
+            <span
+              className={styles.close}
+              onClick={() => setEditContactId(null)}
+            >
+              &times;
+            </span>
+          </header>
 
-        <div className={styles.modal__content}>
-          <AddForm
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            addContact={editRow}
-          />
-        </div>
+          <div className={styles.modal__content}>
+            <AddForm
+              register={register}
+              handleSubmit={handleSubmit}
+              errors={errors}
+              addContact={editRow}
+            />
+          </div>
+        </section>
       </div>
     </>
   );
