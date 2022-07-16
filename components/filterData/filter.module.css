@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+    margin: 20px 0;
+}
+.inputfield{
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: #ebebeb;
+}

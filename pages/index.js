@@ -3,26 +3,33 @@ import {useState, useEffect} from "react"
 import { useForm } from "react-hook-form";
 import styles from '../styles/Home.module.css'
 import Table from "../components/tabla/Table"
-import { nanoid } from 'nanoid'
 import AddForm from '../components/addForm/AddForm';
 import ModalEditForm from '../components/modalEditForm/ModalEditForm';
 import { db } from '../firebase-config';
 import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore"
+import FilterData from '../components/filterData/FilterData';
 
 export default function Home() {
-  
+  const [data, setData] = useState([])
   const [display, setDisplay] = useState([])
   const [add, setAdd] = useState(true)
+  const [filter, setFilter] = useState(true)
   const [editContactId, setEditContactId] = useState(null);
   const [elementToEdit, setElementToEdit] = useState({});
 
   const userCollectionRef = collection(db, "users")
-  useEffect(() => {
 
+  const updateAllData = () => {
     (async function() {
       const data = await getDocs(userCollectionRef)
       setDisplay(data.docs.map(doc => ({...doc.data(), id: doc.id})));
     })();
+    setData(display)
+  }
+
+  useEffect(() => {
+
+    updateAllData()
 
   },[])
   const createUser = async (contact) => {
@@ -58,7 +65,7 @@ export default function Home() {
         suite: "",
         city: ""
       })
-    setDisplay([...display, {id: nanoid(),...newContact}])
+    updateAllData()
   }
   const editRow = (event) => {
     const newContact = {
@@ -71,7 +78,9 @@ export default function Home() {
         city: event.city
         }
       }
+
       updateUser(editContactId,newContact)
+
       let newList = display.map(e => {
         if(e.id === editContactId){
           console.log({ id:e.id , ...newContact})
@@ -96,10 +105,15 @@ export default function Home() {
       </Head>
       {editContactId && <ModalEditForm elementToEdit={elementToEdit} editRow={editRow} setEditContactId={setEditContactId}/>}
       <div className='form__container'>
-        <button className={styles.addBtn} onClick={() => setAdd(!add)}>add +</button>
+        <button className={styles.addBtn} onClick={() => {setAdd(!add), setFilter(true)}}>{ add ?  "add +" : "cancel"}</button>
+        <button className={styles.addBtn} onClick={() => {setFilter(!filter), setAdd(true)}}>filter</button>
         <article style={ {display: add ?  "none" : "block"}}>
           <AddForm register={register} handleSubmit={handleSubmit} errors={errors} addContact={addContact} />
         </article>
+        <article style={ {display: filter ?  "none" : "block"}}>
+          <FilterData setDisplay={setDisplay} data={data} display={display}/>
+        </article>
+
       </div>
       
       <main className={styles.main}>
