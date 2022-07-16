@@ -2,7 +2,7 @@ import AddForm from "../addForm/AddForm";
 import FilterData from "../filterData/FilterData";
 import useHeaderForm from "../../hooks/useHeaderForm"
 import styles from "./headerform.module.css"
-const headerForms = ({setDisplay,data,addContact,register,handleSubmit,errors}) => {
+const HeaderForms = ({setDisplay,data,addContact,register,handleSubmit,errors}) => {
   const {add, filter, handleOpenAndClose} = useHeaderForm()
   
   return (
@@ -40,4 +40,4 @@ const headerForms = ({setDisplay,data,addContact,register,handleSubmit,errors}) 
   )
 }
 
-export default headerForms
+export default HeaderForms
