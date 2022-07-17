@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Este es un projecto [Next.js](https://nextjs.org/) creado como solucion de la prueba tecnica de [`TBTBGLOBAL`](www.tbtbglobal.com). como aspirante al cargo de desarrollador
 
-## Getting Started
+## Setup
 
-First, run the development server:
+- Debera clonar el repositorio en su equipo 
+- en el archivo del repo introduzca en su terminal el comando "npm install" para instalar las dependencias
+- una vez instaladas debera introducir el comando "npm run dev" y dirigirse al localhost:3000
+- para acceder a la base de datos debera ingresar a este enlace [API](https://console.firebase.google.com/project/fir-globaldata/firestore/data/~2Fusers~2F8nCISAtzG9xh3UtfrFUV?hl=es-419) 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## objetivo plateados para este projecto
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- crear una API que que nos permita interactuar con la data usando la metodologia CRUD
+- crear una interfaz que muestre las tablas y permita la interaccion con esta en tiempo real
+- filtar los datos de la tabla ya sea por nombre, correo o ciudad
+- que la interfaz sea accesesible 
+- 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Mi proceso
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### herramientas elegidas
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Semantic HTML5 markup
+- Modulos de CSS
+- Mobile-first workflow
+- [React](https://reactjs.org/) - JS library
+- [Next.js](https://nextjs.org/) - React framework
+- [Firebase](https://firebase.google.com/?hl=es-419) - para la base de datos
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
